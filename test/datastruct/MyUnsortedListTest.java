@@ -8,19 +8,27 @@ import org.junit.Test;
 
 public class MyUnsortedListTest {
 
+	/*	List is empty and size equal 0 */
 	@Test
 	public void empty() {
-		UnsortedList<Integer> list = MyUnsortedList.of();
-		assertEquals("new empty list size", 0, list.size());
-		assertTrue("new empty list is not empty", list.isEmpty());
+		UnsortedList<Integer> list_empty = MyUnsortedList.of();
+		assertEquals("new empty list size", 0, list_empty.size());
+		assertTrue("new empty list is not empty", list_empty.isEmpty());
 	}
 	
+	/*	List is no empty and size not equal 0 */
 	@Test
 	public void notEmpty() {
-		UnsortedList<Integer> list = MyUnsortedList.of(1,2,3);
-		assertEquals("new list size", 3, list.size());
-		assertFalse("new list is empty", list.isEmpty());
+		UnsortedList<Integer> list_no_empty = MyUnsortedList.of(1,2,3);
+		assertEquals("new list size", 3, list_no_empty.size());
+		assertFalse("new list is empty", list_no_empty.isEmpty());
 	}
+	
+	/*					*
+	 *					*
+	 * 		POP 		*
+	 * 					*
+	 *					*/
 	
 	@Test
 	public void popFirst() {
@@ -75,6 +83,12 @@ public class MyUnsortedListTest {
 		list.popLast();
 	}
 	
+	/*					*
+	 * 	   PREPEND 		*
+	 * 	   APPEND 		*
+	 * 	   EMPTY		*
+	 *					*/
+	
 	@Test
 	public void prependFromEmpty() {
 		UnsortedList<Integer> list1 = MyUnsortedList.of();
@@ -95,6 +109,12 @@ public class MyUnsortedListTest {
 		assertEquals("adding 1", list2, list1);
 	}
 	
+	/*					*
+	 * 	   PREPEND 		*
+	 * 	   APPEND 		*
+	 * 	   NO EMPTY		*
+	 *					*/
+	
 	@Test
 	public void prepend() {
 		UnsortedList<Integer> list1 = MyUnsortedList.of(1,2,3);
@@ -113,6 +133,12 @@ public class MyUnsortedListTest {
 		list1.append(4);
 		assertEquals("adding 4", list2, list1);
 	}
+	
+	/*					*
+	 * 	   		 		*
+	 * 	   INSERT 		*
+	 * 	 				*
+	 *					*/
 	
 	@Test
 	public void insertEmpty() {
@@ -161,9 +187,39 @@ public class MyUnsortedListTest {
 	}
 	
 	@Test(expected = IndexOutOfBoundsException.class)
+	public void insertOutOfBoundNegatif() {
+		UnsortedList<Integer> list1 = MyUnsortedList.of(1,2,4,5);
+		list1.insert(3,-1);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void insertOutOfBoundEmpty() {
+		UnsortedList<Integer> list1 = MyUnsortedList.of();
+		list1.insert(3,1);
+	}
+	
+	/*					*
+	 * 	   		 		*
+	 * 	   REMOVE 		*
+	 * 	 				*
+	 *					*/
+	
+	@Test(expected = IndexOutOfBoundsException.class)
 	public void removeOutOfBound() {
 		UnsortedList<Integer> list1 = MyUnsortedList.of(1,2,4,5);
 		list1.remove(list1.size());
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void removeOutOfBoundNegatif() {
+		UnsortedList<Integer> list1 = MyUnsortedList.of(1,2,4,5);
+		list1.remove(-1);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void removeOutOfBoundEmpty() {
+		UnsortedList<Integer> list1 = MyUnsortedList.of();
+		list1.remove(1);
 	}
 	
 	@Test
@@ -199,6 +255,12 @@ public class MyUnsortedListTest {
 		assertEquals("element", 3, val);
 	}
 	
+	/*					*
+	 * 	   		 		*
+	 * 	   EQUAL 		*
+	 * 	 				*
+	 *					*/
+	
 	@Test
 	public void equalEmpty() {
 		UnsortedList<Integer> list1 = MyUnsortedList.of();
@@ -215,6 +277,12 @@ public class MyUnsortedListTest {
 		assertTrue("not equal", list1.equals(list2));
 	}
 	
+	/*					*
+	 * 	   		 		*
+	 * 	   STRING 		*
+	 * 	 				*
+	 *					*/
+	
 	@Test
 	public void toStringEmpty() {
 		UnsortedList<Integer> list = MyUnsortedList.of();
@@ -227,6 +295,12 @@ public class MyUnsortedListTest {
 		
 		assertEquals("not equal", "MyUnsortedList { size = 5, [1, 2, 3, 4, 5] }",list.toString());
 	}
+	
+	/*					*
+	 * 	    EQUAL 		*
+	 * 	  COMPLEXE 		*
+	 * 	 	TYPE		*
+	 *					*/
 	
 	@Test
 	public void equalBigIntegerEmpty() {
